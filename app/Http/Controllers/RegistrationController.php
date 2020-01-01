@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrationRequest;
 use App\Mail\Welcome;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,23 +13,45 @@ class RegistrationController extends Controller
     {
         return view('registration.create');
     }
-    public function store()
+    public function store(RegistrationRequest $request)
     {
+        
+        /*--------------------
+         | The whole validate rule just below was moved to 
+         | the RegistrationRequest class rule method
+         |-----------------------------
+         */
+
+       
         //validate users input
-        $this->validate(request(), [
+        // $this->validate(request(), [
 
-            'name' =>'required',
-            'email' => 'required|email',
-            'password' => 'required|min:4|confirmed'
+        //     // 'name' =>'required',
+        //     // 'email' => 'required|email',
+        //     // 'password' => 'required|min:4|confirmed'
 
-        ]);
-            // create and save user
-        $user = User::create(request(['name', 'email', 'password']));
+        // ]);
+
+
+
+
             
-            //sign them in 
-        auth()->login($user);
+        /*--------------------
+         | The whole create user just below was moved to
+         | the RegistrationRequest class persist method
+         |-----------------------------
+         */
 
-        \Mail::to($user)->send(new Welcome($user));
+        // create and save user
+        // $user = User::create(request(['name', 'email', 'password']));
+            
+        //     //sign them in 
+        // auth()->login($user);
+
+        // \Mail::to($user)->send(new Welcome($user));
+
+
+        $request->persist();
 
         return redirect()->home();
     }
