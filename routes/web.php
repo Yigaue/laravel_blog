@@ -13,7 +13,7 @@
 $stripe = App::make('App\Billing\Stripe');
 
 
-dd($stripe);
+
 
 
 
