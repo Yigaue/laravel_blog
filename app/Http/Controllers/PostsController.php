@@ -75,6 +75,9 @@ class PostsController extends Controller
 
          //Post::create(request(['title', 'body']));
 
+        session()->flash(
+            
+            'message', 'Your post has now been published.');
 
         return redirect('/');
     }
