@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Repositories\Posts;
+use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -18,11 +19,13 @@ class PostsController extends Controller
     public function index(Posts $posts)
     {
        
-        $posts = $posts->all();
+        // this isi just below is coming from posts repository which is an alternative to storing all
+        // our post.
+        //$posts = $posts->all();
 
-        // $posts = Post::latest()
-        // ->filter(request(['month', 'year']))
-        // ->get();
+        $posts = Post::latest()
+        ->filter(request(['month', 'year']))
+        ->get();
             
               
         $archives = Post::archives();
@@ -76,7 +79,7 @@ class PostsController extends Controller
          //Post::create(request(['title', 'body']));
 
         session()->flash(
-            
+
             'message', 'Your post has now been published.');
 
         return redirect('/');

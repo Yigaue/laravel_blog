@@ -19,7 +19,13 @@ class AppServiceProvider extends ServiceProvider
 
      view()->composer('layouts.aside', function ($view){
 
-        $view->with('archives', \App\Post::archives());
+        $view->with(
+        
+         [
+            'archives' => \App\Post::archives(), 
+            'tags' => \App\Tag::has('posts')->get()
+         ]);
+        
      });
 
     }

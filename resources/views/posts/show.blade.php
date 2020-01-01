@@ -6,6 +6,22 @@
         <h1 class="blog-post-title">
         {{ucwords($post->title)}}
         </h1>
+
+        @if(count($post->tags))
+
+        <ul>
+            @foreach ($post->tags as $tag)
+               <li>
+                   
+               <a href="/posts/tags/{{$tag->id}}">
+                    {{$tag->name}}
+                </a>
+            
+            </li>
+            @endforeach
+
+        </ul>
+        @endif
         <p class="blog-post-meta">{{$post->created_at->diffForHumans()}} <a href="#">Mark</a></p>
 
           <p>{{$post->body}}</p>
