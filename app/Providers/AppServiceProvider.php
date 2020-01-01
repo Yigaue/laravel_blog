@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use \App\Billing\Stripe;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
+        // \App::bind('App\Billing\Stripe', function () {
+        $this->app->bind(Stripe::class, function () {
+            return new Stripe(config('services.stripe.secret'));
+        });
+
+        // $stripe = App::make('App\Billing\Stripe');
+        // OR DO
+        //$stripe = App::make('App\Billing\Stripe');
+        // OR DO
+        //$stripe = app('App\Billing\Stripe');
+
     }
 }
