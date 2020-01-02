@@ -13,7 +13,7 @@
             @foreach ($post->tags as $tag)
                <li>
                    
-               <a href="/posts/tags/{{$tag->id}}">
+               <a href="/posts/tags/{{$tag->name}}">
                     {{$tag->name}}
                 </a>
             
@@ -22,7 +22,15 @@
 
         </ul>
         @endif
-        <p class="blog-post-meta">{{$post->created_at->diffForHumans()}} <a href="#">Mark</a></p>
+    <p class="blog-post-meta">{{$post->created_at->diffForHumans()}}  
+        
+        @if(! empty ($post->user->name))
+        <a href="#">{{$post->user->name}} </a>
+
+        @else
+        <span>Anonymouse</span>
+        @endif
+    </p>
 
           <p>{{$post->body}}</p>
           

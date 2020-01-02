@@ -26,7 +26,7 @@
 
           @foreach ($tags as $tag)
         <li>
-        <a href="/posts/tags/{{$tag->id}}">
+        <a href="/posts/tags/{{$tag->name}}">
 
           {{$tag->name}}
 
